@@ -16,7 +16,7 @@ import nose
 from nose.tools import ok_, eq_
 from glob import glob
 
-JAIL_SO = os.path.realpath(pjoin(os.path.dirname(__file__), 'build', 'hdistjail.so'))
+JAIL_SO = os.path.realpath(pjoin(os.path.dirname(__file__), 'build', 'libhdistjail.so.1'))
 
 #
 # Fixture/utils
@@ -89,6 +89,7 @@ def run_in_jail(tempdir,
         env['HDIST_JAIL_MODE'] = jail_mode
     if should_log:
         log_filename = pjoin(tempdir, 'log')
+        open(log_filename, 'a').write('')  # make sure log file is there
         env['HDIST_JAIL_LOG'] = log_filename
     if stderr:
         env['HDIST_JAIL_STDERR'] = 'hdistjail: '
@@ -205,8 +206,8 @@ def test_simple_funcs(tempdir):
 @fixture()
 def test_open(tempdir):
     mock_files(tempdir, ["okfile"])
-    1/0 # make sure to test both with vararg and without...
-    run_assertions(tempdir, '',
+    # FIXME: make sure to test both with vararg and without...
+    run_assertions(tempdir, 'struct stat s;',
                    [('open("okfile", "r") != NULL', 'okfile// fopen'),
                     ('fopen("notpresent", "r") == NULL', 'notpresent// fopen'),
                     ('fopen("created", "w") != NULL', 'created// fopen'),
