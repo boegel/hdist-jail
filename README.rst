@@ -9,17 +9,14 @@ Dependencies
 
 To build ``hdist-jail``, the Jinja2 template engine is required as the source code for ``hdist-jail`` is templated (see ``src/hdistjail.c.in``).
 
-To install Jinja2, simply use ``easy_install``, the Python package installation tool (or equivalent, e.g. ``pip``, ...):
+To install Jinja2, simply use ``easy_install``, the Python package installation tool (or equivalent, e.g. ``pip``, ...)::
 
-```
-easy_install --user jinja2
-```
+    easy_install --user jinja2
 
-Make sure the ``jinja2`` Python module is available by adjusting your ``$PYTHONPATH`` accordingly. You can test this with:
 
-```
-python -c "import jinja2"
-```
+Make sure the ``jinja2`` Python module is available by adjusting your ``$PYTHONPATH`` accordingly. You can test this with::
+
+    python -c "import jinja2"
 
 Usage
 -----
